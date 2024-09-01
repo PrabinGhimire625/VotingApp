@@ -25,18 +25,20 @@ export const login=async(req,res)=>{
         return
     }
     const token=jwt.sign({id:user.id}, process.env.SECRET_KEY, {expiresIn:"5h"});
-    res.cookie("token", token);
-    res.status(200).json({message:"User is successfully login",data:token})    
+    //res.cookie("token", token);
+    res.status(200).json({message:"User is successfully login",
+        token:token,
+        data:user
+    })    
 }
 
 //profile
 export const userProfile=async(req,res)=>{
     const id=req.user.id
-    console.log(id)
-    if(!id){
-        res.status(200).json({message: "Email of that user is not found"})
+    const profileData=await User.findOne({where:{id:id}})
+    if(profileData){
+        res.status(200).json({message:'Succcessfully fetch the user profile',data:profileData})     
     }else{
-        const profileData=await User.findOne({where:{id:id}})
-    res.status(200).json({message:'Succcessfully fetch the user profile',data:profileData})     
+        res.status(404).json({message:"Error on fetching user profile", data:[]})
     }
 }
