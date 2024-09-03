@@ -24,6 +24,7 @@ const authSlice=createSlice({
         },
         setToken(state,action){
             state.token=action.payload
+            console.log(state.token)
         },
         setProfile(state,action){
             state.profile=action.payload

@@ -45,12 +45,22 @@ export const fetchAllCandidate = async (req, res) => {
 
 
 
-//fetch all candidate
-export const fetchSIngleCandidate=async(req,res)=>{
-    const id=req.params.id
-    const response=await Candidate.findOne({where : {id:id}})
-    res.status(200).json({message:"Successfully fetch all the single candidate",data:response})
-}
+// Import necessary modules (if not already imported)
+// const { Candidate } = require('your-model-path'); // Ensure correct path for the model
+
+export const fetchSingleCandidate = async (req, res) => {
+  const id = req.params.id;
+  try {
+      const candidate = await Candidate.findOne({ where: { id: id } });
+      if (candidate) {
+          res.status(200).json({ message: "Successfully fetched the candidate", data: candidate });
+      } else {
+          res.status(404).json({ message: "Candidate not found", data: null });
+      }
+  } catch (error) {
+      res.status(500).json({ message: "Server error occurred", error: error.message });
+  }
+};
 
 //delete candidate
 export const deleteCandidate=async(req,res)=>{

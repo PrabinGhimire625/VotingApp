@@ -11,6 +11,7 @@ dotenv.config();
 const app = express();
 app.use(express.json())
 app.use(express.urlencoded())
+app.use(express.static("./storage"))
 
 //connect backend and frontend
 app.use(cors({
@@ -32,7 +33,7 @@ import { seedCategory } from "./controller/categoryController.js";
 app.use("/user",userRoute)
 app.use("/admin/candidate",candidateRoute)
 app.use("/admin/category",categoryRoute)
-app.use("/vote",voteRoute)
+app.use("/user/vote",voteRoute)
 
 
 //relationship between the user and candidate

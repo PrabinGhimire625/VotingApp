@@ -184,7 +184,7 @@ const Navbar = () => {
                         className='hover:text-yellow-300 text-yellow-300 text-[15px] font-medium block'>New</a></li>
                     <li className='max-lg:border-b max-lg:py-3 px-3'><a href='javascript:void(0)'
                         className='hover:text-yellow-300 text-white text-[15px] font-medium block'>enroll</a></li>
-                    <Link to='/schoollevel'>
+                    <Link to='/level1'>
                     <li className='max-lg:border-b max-lg:py-3 px-3'><a href='javascript:void(0)'
                         className='hover:text-yellow-300 text-white text-[15px] font-medium block'>Vote</a></li>
                     </Link>

@@ -4,35 +4,32 @@ import User from "../database/models/userModel.js";
 
 //add the vote
 export const addVote = async (req, res) => {
-    const userId = req.user.id;
-    const candidateId = req.params.candidateId;
-    try {
+  const userId = req.user.id;
+  const candidateId = req.params.candidateId;
+
+  try {
+      // Check if the user has already voted for this candidate
       const existingVote = await Vote.findOne({
-        where: { userId, candidateId },
+          where: { userId, candidateId },
       });
-  
+
       if (existingVote) {
-        return res.status(400).json({ message: "You have already voted for this candidate." });
+          return res.status(400).json({ message: "You have already voted for this candidate." });
       }
-  
-      const user = await User.findByPk(userId);
-      if (user.isVoted) {
-        return res.status(400).json({ message: "You have already voted." });
-      }
-  
+
+      // Create a new vote
       const newVote = await Vote.create({ userId, candidateId });
-  
+
+      // Increment the vote count for the candidate
       await Candidate.increment('voteCount', { where: { id: candidateId } });
-  
-      user.isVoted = true;
-      await user.save();
-  
-      res.status(201).json({ message: "Vote successfully recorded", data: newVote });
-    } catch (err) {
+
+      res.status(200).json({ message: "Vote successfully recorded", data: newVote });
+  } catch (err) {
       console.error(err);
       res.status(500).json({ error: "Internal server error" });
-    }
-  };
+  }
+};
+
 
 
 //count vote and sort according top vote
