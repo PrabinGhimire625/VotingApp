@@ -190,8 +190,10 @@ const Navbar = () => {
                     </Link>
                     <li className='max-lg:border-b max-lg:py-3 px-3'><a href='javascript:void(0)'
                         className='hover:text-yellow-300 text-white text-[15px] font-medium block'>Leader</a></li>
-                    <li className='max-lg:border-b max-lg:py-3 px-3'><a href='javascript:void(0)'
-                        className='hover:text-yellow-300 text-white text-[15px] font-medium block'>Party</a></li>
+
+                    <Link to='/party'>
+                    <li className='max-lg:border-b max-lg:py-3 px-3'><a href='javascript:void(0)'className='hover:text-yellow-300 text-white text-[15px] font-medium block'>Party</a></li>
+                    </Link>
                     <li className='max-lg:border-b max-lg:py-3 px-3'><a href='javascript:void(0)'
                         className='hover:text-yellow-300 text-white text-[15px] font-medium block'>Feedback</a></li>
                     <li className='max-lg:border-b max-lg:py-3 px-3'><a href='javascript:void(0)'

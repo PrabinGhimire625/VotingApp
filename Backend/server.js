@@ -5,6 +5,7 @@ import User from "./database/models/userModel.js"; //compulsary
 import Candidate from "./database/models/candidateModel.js";
 import Vote from "./database/models/voteModel.js";
 import Category from "./database/models/CategoryModel.js";
+import Party from "./database/models/partyModel.js";
 import cors from "cors";
 
 dotenv.config();
@@ -28,17 +29,25 @@ import userRoute from "./routes/userRoute.js"
 import candidateRoute from "./routes/candidateRoutes.js"
 import voteRoute from "./routes/voteRoutes.js"
 import categoryRoute from "./routes/categoryRoute.js"
+import partyRoute from "./routes/partyRoutes.js"
 import { seedCategory } from "./controller/categoryController.js";
 
 app.use("/user",userRoute)
 app.use("/admin/candidate",candidateRoute)
 app.use("/admin/category",categoryRoute)
+app.use("/admin/party",partyRoute)
 app.use("/user/vote",voteRoute)
+
 
 
 //relationship between the user and candidate
 User.hasMany(Candidate,{foreignKey : 'userId'})
 Candidate.belongsTo(User,{foreignKey : 'userId'})
+
+//party and candidate
+Party.hasMany(Candidate,{foreignKey : 'partyId'})
+Candidate.belongsTo(Party,{foreignKey : 'partyId'})
+
 
 //user and vote
 User.hasMany(Vote,{foreignKey:'userId'})
