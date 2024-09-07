@@ -42,3 +42,61 @@ export const userProfile=async(req,res)=>{
         res.status(404).json({message:"Error on fetching user profile", data:[]})
     }
 }
+
+//fetchAllUser
+export const fetchAllUser=async(req,res)=>{
+    const users=await User.findAll();
+   if(users.length>0){
+        res.status(200).json({message:'Succcessfully fetch all the users',data:users})    
+    }
+}
+
+//fetchsingle user
+export const fetchSingleUser=async(req,res)=>{
+    const id=req.params.id
+    const response=await User.findOne({where:{id:id}})
+    if(response){
+        res.status(200).json({message:'Successfully fetch single users',data:response})
+    }
+}
+
+
+//delete user
+export const deleteUser=async(req,res)=>{
+    const id=req.params.id
+    const response=await User.destroy({where:{id:id}})
+    if(response){
+        res.status(200).json({message:'Successfully delete the users',data:response})
+    }
+}
+
+// Update user
+export const updateUser = async (req, res) => {
+    const { username, email, password, dob, citizenshipNumber } = req.body;
+    const id = req.params.id;
+  
+    if (!id) {
+      return res.status(400).json({ message: "ID is not provided!" });
+    }
+  
+    try {
+      const user = await User.findOne({ where: { id: id } });
+      if (!user) {
+        return res.status(404).json({ message: "User not found!" });
+      }
+  
+      const [users] = await User.update(
+        { username, email, password, dob, citizenshipNumber },
+        { where: { id: id } }
+      );
+  
+      if (users === 0) {
+        return res.status(400).json({ message: "No changes made to the user data!" });
+      }
+  
+      res.status(200).json({ message: "Successfully updated the user", data:users});
+    } catch (error) {
+      res.status(500).json({ message: "Server error", error: error.message });
+    }
+  };
+  

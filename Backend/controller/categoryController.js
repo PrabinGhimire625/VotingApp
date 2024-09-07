@@ -1,10 +1,10 @@
 import Category from "../database/models/CategoryModel.js";
 
 const categoryData = [
-  { categoryName: "schoolLevel" },
-  { categoryName: "teamlLevel" },
-  { categoryName: "classLevel" },
-  { categoryName: "other" },
+  { categoryName: "stateLevel" },
+  { categoryName: "proviceLevel" },
+  { categoryName: "municipalityLevel" },
+  { categoryName: "localLevel" },
 ];
 
 // Category seeder function
@@ -23,12 +23,14 @@ export const seedCategory=async()=>{
 }
 
 //add category
-export const addCategory=async(req,res)=>{
-    const {categoryName}=req.body
-    const category=await Category.create({categoryName})
-    res.status(200).json({message:"Category is successfully added",data:category})
-}
-
+export const addCategory = async (req, res) => {
+  const { categoryName } = req.body;
+  if (!categoryName) {
+      return res.status(400).json({ message: "categoryName is required" });
+  }
+      const category = await Category.create({ categoryName });
+      res.status(201).json({ message: "Category successfully added", data: category });
+};
 //fetch category
 export const fetchAllCategory=async(req,res)=>{
   const category=await Category.findAll()

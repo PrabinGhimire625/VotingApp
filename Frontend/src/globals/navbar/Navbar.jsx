@@ -23,6 +23,7 @@ const Navbar = () => {
 
     return (
         <>
+            {/* top navbar start*/}
             <nav className="bg-red-500">
                 <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                     <div className="relative flex h-16 items-center justify-between">
@@ -66,20 +67,17 @@ const Navbar = () => {
                            {isLoggedIn && (
                              <Link to='profile'>
                                 <div className="relative ml-3">
-                                <div>
-                                    <button type="button" className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                        <span className="absolute -inset-1.5"></span>
-                                        <span className="sr-only">Open user menu</span>
-                                        <img className="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                                    </button>
+                                        <div>
+                                            <button type="button" className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                                <span className="absolute -inset-1.5"></span>
+                                                <span className="sr-only">Open user menu</span>
+                                                <img className="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                                            </button>
+                                        </div>
                                 </div>
-                            </div>
                              </Link>
                            )
-
-                           }
-
-                            
+                           }                           
                         </div>
                     </div>
                 </div>
@@ -92,6 +90,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </nav>
+             {/* top navbar end*/}
 
 
             <header className='shadow-md font-[sans-serif] tracking-wide relative z-50'>
@@ -189,7 +188,7 @@ const Navbar = () => {
                         className='hover:text-yellow-300 text-white text-[15px] font-medium block'>Vote</a></li>
                     </Link>
                     <li className='max-lg:border-b max-lg:py-3 px-3'><a href='javascript:void(0)'
-                        className='hover:text-yellow-300 text-white text-[15px] font-medium block'>Leader</a></li>
+                        className='hover:text-yellow-300 text-white text-[15px] font-medium block'>Candidate</a></li>
 
                     <Link to='/party'>
                     <li className='max-lg:border-b max-lg:py-3 px-3'><a href='javascript:void(0)'className='hover:text-yellow-300 text-white text-[15px] font-medium block'>Party</a></li>

@@ -38,8 +38,6 @@ app.use("/admin/category",categoryRoute)
 app.use("/admin/party",partyRoute)
 app.use("/user/vote",voteRoute)
 
-
-
 //relationship between the user and candidate
 User.hasMany(Candidate,{foreignKey : 'userId'})
 Candidate.belongsTo(User,{foreignKey : 'userId'})

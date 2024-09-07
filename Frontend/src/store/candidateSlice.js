@@ -70,6 +70,27 @@ export function fetchCandidateByParty(partyId) {
 }
 
 
+export function fetchCandidateByCategory(categoryId) {
+    return async function fetchCandidateByCategoryThunk(dispatch) {
+        dispatch(setStatus(STATUS.LOADING));
+        try {
+            const response = await API.get(`/admin/candidate/category/${categoryId}`); // Use path parameter for partyId
+            if (response.status === 200) {
+                const { data } = response.data;
+                dispatch(setCandidateData(data))
+                dispatch(setStatus(STATUS.SUCCESS))
+            } else {
+                dispatch(setStatus(STATUS.ERROR));
+            }
+        } catch (err) {
+            console.error("Error fetching candidates:", err);
+            dispatch(setStatus(STATUS.ERROR));
+        }
+    };
+}
+
+
+
 export function fetchSingleCandidate(id) {
     return async function fetchSingleCandidateThunk(dispatch) {
         dispatch(setStatus(STATUS.LOADING)); 

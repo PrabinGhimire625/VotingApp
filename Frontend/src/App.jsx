@@ -16,7 +16,7 @@ import LevelAll from './pages/candidate/candidateCategory/LevelAll'
 import SingleCandidate from './pages/candidate/singleCandidate/SingleCandidate'
 import Party from './pages/Party/Party'
 import Singleparty from './pages/Party/singleParty/Singleparty'
-import PartyCandidatesPage from './pages/Party/partyCandidatePages/PartyCandidatesPage'
+import CandidateLevel from './pages/Party/candidateLevel/CandidateLevel'
 
 const App = () => {
   return (
@@ -32,10 +32,11 @@ const App = () => {
           <Route path='/level3' element={<Level3/>}/>
           <Route path='/party' element={<Party/>}/>
           <Route path='/levelAll' element={<LevelAll/>}/>
-          <Route path='/partyCandidatesPage' element={<PartyCandidatesPage/>}/>
+
           <Route path='/singleParty/:id' element={<Singleparty/>}/>
           {/* <Route path='/CandidateLanding' element={<CandidateLanding/>}/> */}
           <Route path='/singleCandidate/:id' element={<SingleCandidate/>}/>
+          <Route path='/candidateLevel' element={<CandidateLevel/>}/>
         </Routes>
       </BrowserRouter>
     </Provider>

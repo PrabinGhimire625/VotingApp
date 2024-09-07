@@ -68,6 +68,32 @@ export const fetchCandidatesByParty = async (req, res) => {
   }
 };
 
+// Fetch candidates by categoryId
+export const fetchCandidatesByCategory = async (req, res) => {
+  const { categoryId } = req.params; // Get the categoryId from request parameters
+  try {
+    const response = await Candidate.findAll({
+      where: { categoryId }, // Filter candidates by categoryId
+      include: [
+        { model: User, attributes: ['id', 'email', 'username'] },
+        { model: Category, attributes: ['categoryName'] },
+        { model: Party, attributes: ['partyName'] },
+      ]
+    });
+
+    res.status(200).json({
+      message: "Successfully fetched candidates for the category",
+      data: response
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error fetching candidates",
+      error: error.message
+    });
+  }
+};
+
+
 
 // Import necessary modules (if not already imported)
 // const { Candidate } = require('your-model-path'); // Ensure correct path for the model
