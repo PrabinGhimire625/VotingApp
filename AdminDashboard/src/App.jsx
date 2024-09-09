@@ -5,6 +5,7 @@ import Tables from './pages/sidebar/Tables/Tables'
 import { Provider } from 'react-redux'
 import store from './store/store'
 import Navbar from './globals/navbar/Navbar'
+import Login from './pages/auth/Login/Login'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path='/' element={<Landing/>}/>
+        <Route path='/login' element={<Login/>}/>
         <Route path='/tables' element={<Tables/>}/>
       </Routes>
       </BrowserRouter>

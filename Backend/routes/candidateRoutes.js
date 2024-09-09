@@ -8,7 +8,7 @@ const upload = multer({storage : storage})
 const router=Router()
 
 router.route("/").post(isAuthenticated,restrictTo('admin'),upload.single('image'),errorHandler(createCandidate))
-.get(errorHandler(fetchAllCandidate))
+.get(isAuthenticated,restrictTo('admin'),errorHandler(fetchAllCandidate))
 
 router.route("/:id").
 get(errorHandler(fetchSingleCandidate))

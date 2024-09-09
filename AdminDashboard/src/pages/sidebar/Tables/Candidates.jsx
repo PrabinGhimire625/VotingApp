@@ -1,27 +1,27 @@
 import React, { useEffect } from 'react'
-import { deleteuser, fetchAllUser } from '../../../store/dataSlice'
+import {  deleteCandidate, fetchAllCandidate } from '../../../store/dataSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
-const Users = () => {
+const Candidates = () => {
     const dispatch=useDispatch()
-    const {users} =useSelector((state)=>state.data)
-    console.log(users)
+    const {candidates} =useSelector((state)=>state.data)
+    console.log(candidates)
 
     useEffect(()=>{
-       dispatch( fetchAllUser())
+       dispatch( fetchAllCandidate())
     },[])
 
     //"id" from the component's UI, (clicking the delete button) and not from the Redux state.
     // "user.id "is passed as "id" to handleDeleteUser on clicking to the delete button 
-  const handleDeleteUser = (id) => {
-    dispatch(deleteuser(id));
-  };
+    const handleDeleteCandidates=(id)=>{
+        dispatch(deleteCandidate(id))
+    }
 
   return (
     <>
-    <section className="bg-gray-200 dark:bg-gray-900 p-3 sm:p-5">
+        <section className="bg-gray-200 dark:bg-gray-900 p-3 sm:p-5">
     <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
-        <h1 className="text-3xl font-bold text-red-800 text-center my-4">User List</h1>
+        <h1 className="text-3xl font-bold text-red-800 text-center my-4">Candidate List</h1>
         <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
             <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                 <div className="md:w-1/2">
@@ -84,34 +84,32 @@ const Users = () => {
                         </div>
                     </div>
 
-
                 </div>
             </div>
             <div className="overflow-x-auto">
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col" className="px-4 py-3">User name</th>
-                            <th scope="col" className="px-4 py-3">email</th>
-                            <th scope="col" className="px-4 py-3">dob</th>
-                            <th scope="col" className="px-4 py-3">citizenshipNumber</th>
+                            <th scope="col" className="px-4 py-3">Candidate name</th>
+                            <th scope="col" className="px-4 py-3">Email</th>
+                            <th scope="col" className="px-4 py-3">Address</th>
+                            <th scope="col" className="px-4 py-3">Vote count</th>
                             <th scope="col" className="px-4 py-3">action</th>
                             <th scope="col" className="px-4 py-3">action</th>
-                            
                         </tr>
                     </thead>
                     <tbody>
 
                     {
-                        users && users.length > 0 ? (
-                            users.map((user) => {
+                        candidates && candidates.length > 0 ? (
+                            candidates.map((candidate) => {
                             return (
-                                <tr key={user.id} className="border-b dark:border-gray-700">
-                                <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{user.username}</th>
-                                <td className="px-4 py-3">{user.email}</td>
-                                <td className="px-4 py-3">{user.dob}</td>
-                                <td className="px-4 py-3">{user.citizenshipNumber}</td>
-                              <button   onClick={() => handleDeleteUser(user.id)} >  <td className="px-4 py-3  text-red-600 underline">delete</td></button>
+                                <tr key={candidate.id} className="border-b dark:border-gray-700">
+                                <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{candidate.candidateName}</th>
+                                <td className="px-4 py-3">{candidate.candidateEmail}</td>
+                                <td className="px-4 py-3">{candidate.candidateAddress}</td>
+                                <td className="px-4 py-3">{candidate.voteCount}</td>
+                              <button   onClick={() => handleDeleteCandidates(candidate.id)} >  <td className="px-4 py-3  text-red-600 underline">delete</td></button>
                                 <td className="px-4 py-3 text-red-600 underline">edit</td>
                                 
                                 </tr>
@@ -126,7 +124,6 @@ const Users = () => {
                     </tbody>
                 </table>
             </div>
-           
         </div>
     </div>
     </section>
@@ -134,4 +131,4 @@ const Users = () => {
   )
 }
 
-export default Users
+export default Candidates

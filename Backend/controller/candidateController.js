@@ -101,7 +101,15 @@ export const fetchCandidatesByCategory = async (req, res) => {
 export const fetchSingleCandidate = async (req, res) => {
   const id = req.params.id;
   try {
-      const candidate = await Candidate.findOne({ where: { id: id } });
+      const candidate = await Candidate.findOne(
+        { where: { id: id } ,
+        include: [
+          { model: User, attributes: ['id', 'email', 'username'] },
+          { model: Category, attributes: ['categoryName'] },
+          { model: Party, attributes: ['partyName'] },
+        ]
+      } 
+      );
       if (candidate) {
           res.status(200).json({ message: "Successfully fetched the candidate", data: candidate });
       } else {

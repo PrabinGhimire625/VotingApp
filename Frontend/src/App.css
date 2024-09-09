@@ -1,15 +1,20 @@
-@keyframes slideInFromLeft {
-    0% {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
-    100% {
-      transform: translateX(0);
-      opacity: 1;
-    }
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
   }
-  
-  .slide-in {
-    animation: slideInFromLeft 1s ease-out forwards;
+  100% {
+    transform: translateX(-100%);
   }
-  
+}
+
+.animate-marquee {
+  white-space: nowrap; 
+  overflow: hidden;
+  display: inline-block;
+  animation: marquee 20s linear infinite;
+}
+
+nav {
+  width: 100vw;
+}
+

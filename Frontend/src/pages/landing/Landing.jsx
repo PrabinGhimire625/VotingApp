@@ -1,12 +1,24 @@
 import React from 'react';
-import Home from '../home/Home';
 import Navbar from '../../globals/navbar/Navbar';
+import HeroSection from './HeroSection';
+import Home from '../home/Home';
+
 
 const Landing = () => {
   return (
   <>
-    <Navbar/>
-    <main className="dark:bg-gray-800 bg-white relative overflow-hidden ">
+  <Navbar/>
+  <HeroSection/>
+  <Home/>
+
+   
+  
+
+
+
+
+
+    {/* <main className="dark:bg-gray-800 bg-white relative overflow-hidden ">
     <div className="bg-white dark:bg-gray-800 flex relative z-20 items-center overflow-hidden">
         <div className="container mx-auto px-6 flex relative py-16">
             <div className="sm:w-2/3 lg:w-2/5 flex flex-col relative z-20">
@@ -39,9 +51,9 @@ const Landing = () => {
 
         </div>
     </div>
-    </main>
+    </main> */}
 
-    <Home/>
+    {/* <Home/> */}
     
 
 

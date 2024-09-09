@@ -1,30 +1,27 @@
 import React, { useEffect } from 'react'
-import { deleteuser, fetchAllUser, setDeleteUserById } from '../../../store/dataSlice'
+import { fetchAllCategory } from '../../../store/dataSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
-const Users = () => {
+const Category = () => {
     const dispatch=useDispatch()
-    const {users,status} =useSelector((state)=>state.data)
-    console.log(users)
+    const {category,status} =useSelector((state)=>state.data)
     console.log(status)
 
 
     useEffect(()=>{
-       dispatch( fetchAllUser())
+       dispatch( fetchAllCategory())
     },[])
 
 
     //"id" from the component's UI, (clicking the delete button) and not from the Redux state.
     // "user.id "is passed as "id" to handleDeleteUser on clicking to the delete button 
-  const handleDeleteUser = (id) => {
-    dispatch(deleteuser(id));
-  };
+
 
   return (
     <>
     <section className="bg-gray-200 dark:bg-gray-900 p-3 sm:p-5">
     <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
-        <h1 className="text-3xl font-bold text-red-800 text-center my-4">User List</h1>
+        <h1 className="text-3xl font-bold text-red-800 text-center my-4">Category List</h1>
         <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
             <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                 <div className="md:w-1/2">
@@ -94,10 +91,8 @@ const Users = () => {
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col" className="px-4 py-3">User name</th>
-                            <th scope="col" className="px-4 py-3">email</th>
-                            <th scope="col" className="px-4 py-3">dob</th>
-                            <th scope="col" className="px-4 py-3">citizenshipNumber</th>
+                            <th scope="col" className="px-4 py-3">Category name</th>
+                            
                             <th scope="col" className="px-4 py-3">action</th>
                             <th scope="col" className="px-4 py-3">action</th>
                             
@@ -106,15 +101,13 @@ const Users = () => {
                     <tbody>
 
                     {
-                        users && users.length > 0 ? (
-                            users.map((user) => {
+                        category && category.length > 0 ? (
+                            category.map((cat) => {
                             return (
-                                <tr key={user.id} className="border-b dark:border-gray-700">
-                                <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{user.username}</th>
-                                <td className="px-4 py-3">{user.email}</td>
-                                <td className="px-4 py-3">{user.dob}</td>
-                                <td className="px-4 py-3">{user.citizenshipNumber}</td>
-                              <button   onClick={() => handleDeleteUser(user.id)} >  <td className="px-4 py-3  text-red-600 underline">delete</td></button>
+                                <tr key={cat.id} className="border-b dark:border-gray-700">
+                                <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{cat.categoryName}</th>
+                              
+                              <button   onClick={() => handleDeleteUser(cat.id)} >  <td className="px-4 py-3  text-red-600 underline">delete</td></button>
                                 <td className="px-4 py-3 text-red-600 underline">edit</td>
                                 
                                 </tr>
@@ -141,4 +134,4 @@ const Users = () => {
   )
 }
 
-export default Users
+export default Category

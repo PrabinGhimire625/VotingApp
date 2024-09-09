@@ -2,6 +2,8 @@ import React from "react";
 import Users from "./User";
 import Candidates from "./Candidates";
 import Sidebar from "../Sidebar";
+import Category from "./Category";
+import Party from "./Party";
 
 const Tables = () => {
   return (
@@ -12,7 +14,9 @@ const Tables = () => {
           <div className="flex flex-col flex-1 overflow-y-auto min-h-screen">
               <div className="p-4">
                 <Users/>
-                <Users/>
+                <Candidates/>
+                <Category/>
+                <Party/>
               </div>
           </div>
        </div>

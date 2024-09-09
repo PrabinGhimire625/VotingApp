@@ -58,7 +58,6 @@ export function fetchCandidateByParty(partyId) {
                 const { data } = response.data;
                 dispatch(setCandidateData(data))
                 dispatch(setStatus(STATUS.SUCCESS))
-                
             } else {
                 dispatch(setStatus(STATUS.ERROR));
             }

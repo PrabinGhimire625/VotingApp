@@ -45,7 +45,7 @@ const SingleCandidate = () => {
                         <img src={`http://localhost:3000/${singleCandidate?.imageUrl}`} className="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0">
                         </img>
                         <h1 className="text-xl font-bold">{singleCandidate?.candidateName}</h1>
-                        <p className="text-gray-700">School captain</p>       
+                        <p className="text-gray-700">{singleCandidate?.Party?.partyName}</p>       
                             <div className="flex justify-center items-center gap-6 my-6">
                         <a className="text-gray-700 hover:text-orange-600" aria-label="Visit TrendyMinds LinkedIn" href=""
                             target="_blank">
@@ -106,60 +106,62 @@ const SingleCandidate = () => {
                 </div>
             </div>
             <div className="col-span-4 sm:col-span-9">
+
+
                 <div className="bg-white shadow rounded-lg p-6">
                     <h2 className="text-xl font-bold mb-4">About Me</h2>
-                    <p className="text-gray-700">
-                        {singleCandidate?.candidateDescription}
-                    </p>
+                        <p className="text-gray-700">
+                            {singleCandidate?.candidateDescription}
+                        </p>
 
-                    <h2 className="text-xl font-bold mt-6 mb-4">Experience</h2>
+                    <h2 className="text-xl font-bold mt-6 mb-4">Previous work</h2>
                     <div className="mb-6">
                         <div className="flex justify-between flex-wrap gap-2 w-full">
-                            <span className="text-gray-700 font-bold">Web Developer</span>
-                            <p>
-                                <span className="text-gray-700 mr-2">at ABC Company</span>
-                                <span className="text-gray-700">2017 - 2019</span>
-                            </p>
+                        <span className="text-gray-700 font-bold">Building hospital</span>
+                        <p>
+                            <span className="text-gray-700 mr-2">at XYZ Corporation</span>
+                            <span className="text-gray-700">2020 - 2023</span>
+                        </p>
                         </div>
                         <p className="mt-2">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus est vitae
-                            tortor ullamcorper, ut vestibulum velit convallis. Aenean posuere risus non velit egestas
-                            suscipit.
+                        Last year, I spearheaded the construction of a modern hospital, managing all aspects from design to completion. The facility now stands as a cutting-edge healthcare center, ready to serve the community with top-notch medical services.
                         </p>
                     </div>
+  
                     <div className="mb-6">
                         <div className="flex justify-between flex-wrap gap-2 w-full">
-                            <span className="text-gray-700 font-bold">Web Developer</span>
-                            <p>
-                                <span className="text-gray-700 mr-2">at ABC Company</span>
-                                <span className="text-gray-700">2017 - 2019</span>
-                            </p>
+                        <span className="text-gray-700 font-bold">Road construction</span>
+                        <p>
+                            <span className="text-gray-700 mr-2">at ABC Marketing Agency</span>
+                            <span className="text-gray-700">2017 - 2020</span>
+                        </p>
                         </div>
                         <p className="mt-2">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus est vitae
-                            tortor ullamcorper, ut vestibulum velit convallis. Aenean posuere risus non velit egestas
-                            suscipit.
+                        Last year, I led a major road construction project, overseeing the entire process from planning to execution. The newly built road now facilitates smoother and safer transportation for the community, significantly improving connectivity.
                         </p>
                     </div>
+
                     <div className="mb-6">
                         <div className="flex justify-between flex-wrap gap-2 w-full">
-                            <span className="text-gray-700 font-bold">Web Developer</span>
-                            <p>
-                                <span className="text-gray-700 mr-2">at ABC Company</span>
-                                <span className="text-gray-700">2017 - 2019</span>
-                            </p>
+                        <span className="text-gray-700 font-bold">Tree plantation program</span>
+                        <p>
+                            <span className="text-gray-700 mr-2">at Global Sales Inc.</span>
+                            <span className="text-gray-700">2015 - 2017</span>
+                        </p>
                         </div>
                         <p className="mt-2">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus est vitae
-                            tortor ullamcorper, ut vestibulum velit convallis. Aenean posuere risus non velit egestas
-                            suscipit.
+                        Last year, I organized a tree plantation program, successfully planting hundreds of trees in urban and rural areas. This initiative has contributed to environmental sustainability and enhanced green spaces in the community.
                         </p>
                     </div>
-                       <div className="mt-6 flex flex-wrap gap-4 justify-center">
-                            <a href="#" className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Contact</a>
-                            <button onClick={handleVote} className="bg-red-800 hover:bg-red-500 text-white py-2 px-4 rounded">Vote</button>
-                        </div>
+
+  <div className="mt-6 flex flex-wrap gap-4 justify-center">
+    <a href="#" className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Contact</a>
+    <button onClick={handleVote} className="bg-red-800 hover:bg-red-500 text-white py-2 px-4 rounded">Vote</button>
+  </div>
                 </div>
+
+
+
             </div>
         </div>
     </div>

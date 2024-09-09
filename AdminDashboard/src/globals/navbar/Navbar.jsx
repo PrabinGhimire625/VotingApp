@@ -1,6 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom'
+import { setToken } from '../../store/authSlice';
 
 const Navbar = () => {
+    const navigate=useNavigate()
+    const dispatch=useDispatch()
+    const {token,status} = useSelector((state) => state.auth);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const localStorageToken = localStorage.getItem('token');
+        console.log('localStorageToken:', localStorageToken);
+        console.log('Redux token:', token);
+        
+        // Synchronize localStorage with Redux
+        if (localStorageToken) {
+            dispatch(setToken(localStorageToken));
+        }
+        
+        // Set login state based on token presence
+        setIsLoggedIn(!!localStorageToken || !!token);
+    }, [token, dispatch]);
+
+
+
+    const handleLogout=()=>{
+        localStorage.removeItem('token')
+        setIsLoggedIn(false)
+        navigate("/login")
+    }
+
+
   return (
     <>
         <header className='shadow-md font-[sans-serif] tracking-wide relative z-50'>
@@ -15,14 +46,21 @@ const Navbar = () => {
 
             <div className="ml-auto max-lg:mt-4">
                 <ul className='flex items-center'>
-                <li className="max-sm:hidden flex items-center justify-center text-[15px] max-lg:py-3 px-4 font-medium text-white bg-blue-700 cursor-pointer rounded-md">
-                     Login
-                </li>
-                <li className="max-sm:hidden flex items-center justify-center text-[15px] max-lg:py-3 px-4 font-medium text-white bg-red-700 cursor-pointer rounded-md">
-                     Logout
-                </li>
+                    
 
-
+                    {!isLoggedIn ? (
+                        <Link to='/login'>
+                          <button className="max-sm:hidden flex items-center justify-center text-[15px] max-lg:py-3 px-4 font-medium text-white bg-blue-700 cursor-pointer rounded-md h-8">
+                              Login
+                          </button>
+                      </Link>
+                    ):(
+                        <button onClick={handleLogout} className="max-sm:hidden flex items-center justify-center text-[15px] max-lg:py-3 px-4 font-medium text-white bg-red-700 cursor-pointer rounded-md h-8">
+                            Logout
+                        </button>
+                    )
+                    }
+                 
                     <li className='max-sm:hidden flex text-[15px] max-lg:py-2 px-3 font-medium text-[#333] cursor-pointer'>
                     <div className="relative ml-3">
                                         <div>

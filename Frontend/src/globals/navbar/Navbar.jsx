@@ -206,11 +206,7 @@ const Navbar = () => {
             </header>
             
             {/* powerpoint section */}
-            <nav className=" p-4 shadow-md">
-             <div className="container mx-auto justify-center ">
-                <h1 className="text-xl font-bold text-red-600 animate-marquee">Welcome to the School Voting System</h1>
-             </div>
-            </nav>
+         
         </>
     );
 };
