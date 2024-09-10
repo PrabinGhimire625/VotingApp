@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react'
-import { fetchAllCategory } from '../../../store/dataSlice'
+import { deleteCategory, fetchAllCategory } from '../../../store/dataSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 const Category = () => {
     const dispatch=useDispatch()
     const {category,status} =useSelector((state)=>state.data)
     console.log(status)
-
 
     useEffect(()=>{
        dispatch( fetchAllCategory())
@@ -15,7 +14,9 @@ const Category = () => {
 
     //"id" from the component's UI, (clicking the delete button) and not from the Redux state.
     // "user.id "is passed as "id" to handleDeleteUser on clicking to the delete button 
-
+    const handleDeleteCategory=(id)=>{
+        dispatch(deleteCategory(id))
+    }
 
   return (
     <>
@@ -107,7 +108,7 @@ const Category = () => {
                                 <tr key={cat.id} className="border-b dark:border-gray-700">
                                 <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{cat.categoryName}</th>
                               
-                              <button   onClick={() => handleDeleteUser(cat.id)} >  <td className="px-4 py-3  text-red-600 underline">delete</td></button>
+                              <button   onClick={() => handleDeleteCategory(cat.id)} >  <td className="px-4 py-3  text-red-600 underline">delete</td></button>
                                 <td className="px-4 py-3 text-red-600 underline">edit</td>
                                 
                                 </tr>

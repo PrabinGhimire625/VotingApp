@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import { fetchAllParty } from '../../../store/dataSlice'
+import { deleteParty, fetchAllParty } from '../../../store/dataSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 const Party = () => {
     const dispatch=useDispatch()
-    const {party,status} =useSelector((state)=>state.data)
+    const {party} =useSelector((state)=>state.data)
     console.log(party)
 
 
@@ -15,7 +15,9 @@ const Party = () => {
 
     //"id" from the component's UI, (clicking the delete button) and not from the Redux state.
     // "user.id "is passed as "id" to handleDeleteUser on clicking to the delete button 
-
+    const handleDeleteParty=(id)=>{
+        dispatch(deleteParty(id))
+    }
 
   return (
     <>
@@ -107,7 +109,7 @@ const Party = () => {
                                 <tr key={part.id} className="border-b dark:border-gray-700">
                                 <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{part?.partyName}</th>
                                 <td className="px-4 py-3">{part?.estd}</td>
-                              <button   onClick={() => handleDeleteUser(part.id)} >  <td className="px-4 py-3  text-red-600 underline">delete</td></button>
+                              <button   onClick={() => handleDeleteParty(part.id)} >  <td className="px-4 py-3  text-red-600 underline">delete</td></button>
                                 <td className="px-4 py-3 text-red-600 underline">edit</td>
                                 
                                 </tr>

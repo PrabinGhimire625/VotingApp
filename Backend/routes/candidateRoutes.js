@@ -18,7 +18,6 @@ get(errorHandler(fetchSingleCandidate))
 //fetch candidate based on the party
 router.route("/party/:partyId").get(errorHandler(fetchCandidatesByParty))
 
-
 //fetch candidate based on the category
 router.route("/category/:categoryId").get(errorHandler(fetchCandidatesByCategory))
 

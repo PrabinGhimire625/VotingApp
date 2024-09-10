@@ -38,11 +38,19 @@ const dataSlice=createSlice({
         setDeleteCandidateById(state,action){
             const index=state.candidates.findIndex(candidate=>candidate._id===action.payload.candidateId)
             state.candidates.splice(index,1)
+        },
+        setDeleteCategoryById(state,action){
+            const index=state.category.findIndex(cate=>cate._id=action.payload.categoryId)
+            state.category.splice(index,1)
+        },
+        setDeletePartyById(state,action){
+            const index=state.party.findIndex(part=>part._id==action.payload.partyId)
+            state.party.splice(index,1)
         }
     }
 })
 
-export const {setUser,setCandidates,setVotes,setStatus,setDeleteUserById,setDeleteCandidateById,setCategory,setParty}=dataSlice.actions
+export const {setUser,setCandidates,setDeletePartyById,setVotes,setStatus,setDeleteCategoryById,setDeleteUserById,setDeleteCandidateById,setCategory,setParty}=dataSlice.actions
 export default dataSlice.reducer
 
 //fetch all the user
@@ -82,6 +90,27 @@ export function deleteuser(userId){
             }
         }catch(err){
             console.log(err)
+            dispatch(setStatus(STATUS.ERROR))
+        }
+    }
+}
+
+//add candidates
+export function addCandidate(candidateData){
+    return async function addProductThunk(dispatch){
+        dispatch(setStatus(STATUS.LOADING))
+        try {
+            const response = await APIAuthenticated.post('/admin/candidate',candidateData,{
+                headers : {
+                    "Content-Type" : "multipart/form-data"
+                }
+            })
+            if(response.status === 200){
+                dispatch(setStatus(STATUS.SUCCESS))
+            }else{
+                dispatch(setStatus(STATUS.ERROR))
+            }
+        } catch (error) {
             dispatch(setStatus(STATUS.ERROR))
         }
     }
@@ -129,6 +158,8 @@ export function deleteCandidate(candidateId){
     }
 }
 
+
+
 //fetch all the category
 export function fetchAllCategory(){
     return async function fetchAllCategoryThunk(dispatch) {
@@ -140,6 +171,26 @@ export function fetchAllCategory(){
                 const {data}=response.data
                 console.log(data)
                 dispatch(setCategory(data))
+                dispatch(setStatus(STATUS.SUCCESS))
+            }else{
+                dispatch(setStatus(STATUS.ERROR))
+            }
+        }catch(err){
+            console.log(err)
+            dispatch(setStatus(STATUS.ERROR))
+        }
+    }
+}
+
+//delete each category
+export function deleteCategory(categoryId){
+    return async function deleteCategoryThunk(dispatch) {
+        dispatch(setStatus(STATUS.LOADING))
+        try{
+            const response=await APIAuthenticated.delete(`/admin/category/${categoryId}`)
+            console.log(response)
+            if(response.status===200){
+                dispatch(setDeleteCategoryById({categoryId}))
                 dispatch(setStatus(STATUS.SUCCESS))
             }else{
                 dispatch(setStatus(STATUS.ERROR))
@@ -163,6 +214,26 @@ export function fetchAllParty(){
                 const {data}=response.data
                 console.log(data)
                 dispatch(setParty(data))
+                dispatch(setStatus(STATUS.SUCCESS))
+            }else{
+                dispatch(setStatus(STATUS.ERROR))
+            }
+        }catch(err){
+            console.log(err)
+            dispatch(setStatus(STATUS.ERROR))
+        }
+    }
+}
+
+//delete each party
+export function deleteParty(partyId){
+    return async function deletePartyThunk(dispatch) {
+        dispatch(setStatus(STATUS.LOADING))
+        try{
+            const response=await APIAuthenticated.delete(`/admin/party/${partyId}`)
+            console.log(response)
+            if(response.status===200){
+                dispatch(setDeletePartyById({categoryId}))
                 dispatch(setStatus(STATUS.SUCCESS))
             }else{
                 dispatch(setStatus(STATUS.ERROR))

@@ -7,7 +7,7 @@ import errorHandler from "../services/catchAsyncError.js";
 const upload = multer({storage : storage})
 const router=Router()
 router.route("/").post(isAuthenticated,restrictTo('admin'),upload.single('image'),errorHandler(addParty))
-.get(errorHandler(fetchAllparty))
+.get(isAuthenticated,restrictTo('admin'),errorHandler(fetchAllparty))
 
 
 router.route("/:id")
