@@ -6,8 +6,8 @@ import { Provider } from 'react-redux'
 import store from './store/store'
 import Navbar from './globals/navbar/Navbar'
 import Login from './pages/auth/Login/Login'
-
-import SidebarForm from './pages/form/SidebarForm'
+import AddCandidate from './pages/form/AddCandidate'
+import AddCategory from './pages/form/AddCategory'
 
 function App() {
   return (
@@ -18,7 +18,8 @@ function App() {
         <Route path='/' element={<Landing/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/tables' element={<Tables/>}/>
-        <Route path='/sidebarForm' element={<SidebarForm/>}/>
+        <Route path='/addCandidate' element={<AddCandidate/>}/>
+        <Route path='/addCategory' element={<AddCategory/>}/>
       </Routes>
       </BrowserRouter>
     </Provider>

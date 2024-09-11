@@ -13,6 +13,13 @@ const dataSlice=createSlice({
         status:STATUS.LOADING
     },
     reducers:{
+        setStatus(state,action){
+            state.status=action.payload
+        },
+        resetStatus(state){
+            state.status=STATUS.LOADING
+
+        },
         setUser(state,action){
             state.users=action.payload
         },
@@ -28,9 +35,7 @@ const dataSlice=createSlice({
         setParty(state,action){
             state.party=action.payload
         },
-        setStatus(state,action){
-            state.status=action.payload
-        },
+      
         setDeleteUserById(state, action){
             const index=state.users.findIndex(user=>user._id===action.payload.userId) 
             state.users.splice(index, 1)  
@@ -50,7 +55,7 @@ const dataSlice=createSlice({
     }
 })
 
-export const {setUser,setCandidates,setDeletePartyById,setVotes,setStatus,setDeleteCategoryById,setDeleteUserById,setDeleteCandidateById,setCategory,setParty}=dataSlice.actions
+export const {setUser,setCandidates,resetStatus,setDeletePartyById,setVotes,setStatus,setDeleteCategoryById,setDeleteUserById,setDeleteCandidateById,setCategory,setParty}=dataSlice.actions
 export default dataSlice.reducer
 
 //fetch all the user
@@ -159,6 +164,25 @@ export function deleteCandidate(candidateId){
 }
 
 
+
+
+//add category
+export function addCategory(categoryData){
+    return async function addCategoryThunk(dispatch){
+        dispatch(setStatus(STATUS.LOADING))
+        try{
+            const response=await APIAuthenticated.post("/admin/category",categoryData)
+            console.log(response)
+            if(response.status === 200){
+                dispatch(setStatus(STATUS.SUCCESS))
+            }else{
+                dispatch(setStatus(STATUS.ERROR))
+            }
+        }catch(err){
+            dispatch(setStatus(STATUS.ERROR))
+        }     
+    }
+}
 
 //fetch all the category
 export function fetchAllCategory(){

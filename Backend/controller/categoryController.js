@@ -29,7 +29,7 @@ export const addCategory = async (req, res) => {
       return res.status(400).json({ message: "categoryName is required" });
   }
       const category = await Category.create({ categoryName });
-      res.status(201).json({ message: "Category successfully added", data: category });
+      res.status(200).json({ message: "Category successfully added", data: category });
 };
 //fetch category
 export const fetchAllCategory=async(req,res)=>{
