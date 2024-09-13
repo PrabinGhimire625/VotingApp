@@ -11,12 +11,6 @@ const Landing = () => {
   <HeroSection/>
   <Home/>
 
-   
-  
-
-
-
-
 
     {/* <main className="dark:bg-gray-800 bg-white relative overflow-hidden ">
     <div className="bg-white dark:bg-gray-800 flex relative z-20 items-center overflow-hidden">

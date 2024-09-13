@@ -28,6 +28,7 @@ export function fetchCategory(){
         dispatch(setStatus(STATUS.LOADING))
         try{
             const response=await API.get("/admin/category")
+            console.log(response)
             if(response.status===200){
                 const {data}=response.data
                 dispatch(setCategory(data))

@@ -152,7 +152,7 @@ export const updateCandidate = async (req, res) => {
             console.log("Old image deleted successfully");
           }
         });
-        fileName = "http://localhost:3000/" + req.file.filename;  // Set new image URL
+        fileName = req.file.filename;  // Set new image URL
       }
       // Update the candidate in the database
       const [candidates] = await Candidate.update(

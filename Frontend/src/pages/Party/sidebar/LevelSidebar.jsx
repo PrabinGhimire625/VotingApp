@@ -6,6 +6,7 @@ import { fetchCategory } from '../../../store/categorySlice';
 const LevelSidebar = () => {
     const dispatch = useDispatch();
     const { category } = useSelector((state) => state.category);
+    console.log(category)
 
     useEffect(() => {
         dispatch(fetchCategory());

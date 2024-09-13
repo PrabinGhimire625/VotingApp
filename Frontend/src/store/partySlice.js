@@ -46,6 +46,8 @@ export function fetchParty(){
         dispatch(setStatus(STATUS.LOADING))
         try{
             const response=await API.get("/admin/party")
+            console.log(response)
+
             if(response.status===200){
                 const {data}=response.data
                 dispatch(setParty(data))
