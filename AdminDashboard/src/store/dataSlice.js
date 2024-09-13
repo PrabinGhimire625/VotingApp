@@ -10,6 +10,8 @@ const dataSlice=createSlice({
         votes:[],
         category:[],
         party:[],
+        singleCategory:null,
+        singleParty:null,
         status:STATUS.LOADING
     },
     reducers:{
@@ -32,8 +34,14 @@ const dataSlice=createSlice({
         setCategory(state,action){
             state.category=action.payload
         },
+        setSingleCategory(state,action){
+            state.singleCategory=action.payload
+        },
         setParty(state,action){
             state.party=action.payload
+        },
+        setSingleParty(state,action){
+            state.singleParty=action.payload
         },
       
         setDeleteUserById(state, action){
@@ -51,11 +59,32 @@ const dataSlice=createSlice({
         setDeletePartyById(state,action){
             const index=state.party.findIndex(part=>part._id==action.payload.partyId)
             state.party.splice(index,1)
+        },
+        setUpdateCategory(state, action) {
+            const index = state.category.findIndex(item => item.id === action.payload.id);
+            if (index !== -1) {
+                state.category[index] = {
+                    ...state.category[index], // spread the existing data
+                    categoryName: action.payload.categoryData // update the category name
+                };
+            }
+        },
+       // Reducer case for updating party
+        setUpdateParty(state, action) {
+            const index = state.party.findIndex(item => item.id === action.payload.id);
+            if (index !== -1) {
+                state.party[index] = {
+                    ...state.party[index], // spread the existing data
+                    ...action.payload.partyData // spread the new data
+                };
+            }
         }
+
+        
     }
 })
 
-export const {setUser,setCandidates,resetStatus,setDeletePartyById,setVotes,setStatus,setDeleteCategoryById,setDeleteUserById,setDeleteCandidateById,setCategory,setParty}=dataSlice.actions
+export const {setUser,setSingleCategory,setSingleParty,setUpdateParty,setUpdateCategory,setCandidates,resetStatus,setDeletePartyById,setVotes,setStatus,setDeleteCategoryById,setDeleteUserById,setDeleteCandidateById,setCategory,setParty}=dataSlice.actions
 export default dataSlice.reducer
 
 //fetch all the user
@@ -102,7 +131,7 @@ export function deleteuser(userId){
 
 //add candidates
 export function addCandidate(candidateData){
-    return async function addProductThunk(dispatch){
+    return async function addCandidateThunk(dispatch){
         dispatch(setStatus(STATUS.LOADING))
         try {
             const response = await APIAuthenticated.post('/admin/candidate',candidateData,{
@@ -206,6 +235,29 @@ export function fetchAllCategory(){
     }
 }
 
+//fetch single category
+export function fetchSingleCategory(id) {
+    return async function fetchSingleCategoryThunk(dispatch) {
+        dispatch(setStatus(STATUS.LOADING)); 
+        try {
+            const response = await API.get(`/admin/category/${id}`); 
+            console.log(response)
+            if (response.status === 200) {
+                const {data} = response.data
+                console.log(data)
+                dispatch(setSingleCategory(data)); 
+                dispatch(setStatus(STATUS.SUCCESS)); 
+            } else {
+                dispatch(setStatus(STATUS.ERROR)); 
+            }
+        } catch (err) {
+            console.error("Error fetching single candidates:", err); 
+            dispatch(setStatus(STATUS.ERROR)); 
+        }
+    };
+}
+
+
 //delete each category
 export function deleteCategory(categoryId){
     return async function deleteCategoryThunk(dispatch) {
@@ -226,6 +278,47 @@ export function deleteCategory(categoryId){
     }
 }
 
+
+// update category
+export function updateCategory(categoryData, id) {
+    return async function updateCategoryThunk(dispatch) {
+        dispatch(setStatus(STATUS.LOADING));
+        try {
+            const response = await APIAuthenticated.patch(`/admin/category/${id}`, categoryData);
+            console.log(response)
+            if (response.status === 200) {
+                dispatch(setStatus(STATUS.SUCCESS));
+                dispatch(setUpdateCategory({ id, categoryData })); // Use the correct category field
+            } else {
+                dispatch(setStatus(STATUS.ERROR));
+            }
+        } catch (error) {
+            dispatch(setStatus(STATUS.ERROR));
+        }
+    };
+}
+
+
+//add party
+export function addParty(partyData){
+    return async function addPartyThunk(dispatch){
+        dispatch(setStatus(STATUS.LOADING))
+        try {
+            const response = await APIAuthenticated.post('/admin/party',partyData,{
+                headers : {
+                    "Content-Type" : "multipart/form-data"
+                }
+            })
+            if(response.status === 200){
+                dispatch(setStatus(STATUS.SUCCESS))
+            }else{
+                dispatch(setStatus(STATUS.ERROR))
+            }
+        } catch (error) {
+            dispatch(setStatus(STATUS.ERROR))
+        }
+    }
+}
 
 //fetch all the party
 export function fetchAllParty(){
@@ -249,6 +342,28 @@ export function fetchAllParty(){
     }
 }
 
+//fetch single party
+export function fetchSingleParty(id) {
+    return async function fetchSinglePartyThunk(dispatch) {
+        dispatch(setStatus(STATUS.LOADING)); 
+        try {
+            const response = await API.get(`/admin/party/${id}`); 
+            console.log(response)
+            if (response.status === 200) {
+                const {data} = response.data
+                console.log(data)
+                dispatch(setSingleParty(data)); 
+                dispatch(setStatus(STATUS.SUCCESS)); 
+            } else {
+                dispatch(setStatus(STATUS.ERROR)); 
+            }
+        } catch (err) {
+            console.error("Error fetching single party:", err); 
+            dispatch(setStatus(STATUS.ERROR)); 
+        }
+    };
+}
+
 //delete each party
 export function deleteParty(partyId){
     return async function deletePartyThunk(dispatch) {
@@ -267,4 +382,29 @@ export function deleteParty(partyId){
             dispatch(setStatus(STATUS.ERROR))
         }
     }
+}
+
+
+// update party
+export function updateParty(partyData, id) {
+    return async function updatePartyThunk(dispatch) {
+        dispatch(setStatus(STATUS.LOADING));
+        try {
+            const response = await APIAuthenticated.patch(`/admin/party/${id}`, partyData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            });
+
+            console.log(response);
+            if (response.status === 200) {
+                dispatch(setStatus(STATUS.SUCCESS));
+                dispatch(setUpdateParty({ id, partyData }));
+            } else {
+                dispatch(setStatus(STATUS.ERROR));
+            }
+        } catch (error) {
+            dispatch(setStatus(STATUS.ERROR));
+        }
+    };
 }

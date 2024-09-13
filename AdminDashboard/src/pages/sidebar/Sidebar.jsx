@@ -60,7 +60,7 @@ const Sidebar = () => {
                     <Link to="/addCategory" className="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700"  >
                       Add Category
                     </Link>
-                    <Link to="/register" className="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700"  >
+                    <Link to="/addParty" className="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700"  >
                       Add Party
                     </Link>
                 </div>

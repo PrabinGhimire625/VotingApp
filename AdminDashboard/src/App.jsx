@@ -8,6 +8,9 @@ import Navbar from './globals/navbar/Navbar'
 import Login from './pages/auth/Login/Login'
 import AddCandidate from './pages/form/AddCandidate'
 import AddCategory from './pages/form/AddCategory'
+import AddParty from './pages/form/AddParty'
+import UpdateCategory from './pages/form/update/UpdateCategory'
+import UpdateParty from "./pages/form/update/UpdateParty"
 
 function App() {
   return (
@@ -20,6 +23,10 @@ function App() {
         <Route path='/tables' element={<Tables/>}/>
         <Route path='/addCandidate' element={<AddCandidate/>}/>
         <Route path='/addCategory' element={<AddCategory/>}/>
+        <Route path='/addParty' element={<AddParty/>}/>
+        <Route path='/updateCategory/:id' element={<UpdateCategory/>}/>
+        <Route path='/updateParty/:id' element={<UpdateParty/>}/>
+       
       </Routes>
       </BrowserRouter>
     </Provider>

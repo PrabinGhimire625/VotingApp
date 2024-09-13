@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { deleteCategory, fetchAllCategory } from '../../../store/dataSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const Category = () => {
     const dispatch=useDispatch()
@@ -109,7 +110,9 @@ const Category = () => {
                                 <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{cat.categoryName}</th>
                               
                               <button   onClick={() => handleDeleteCategory(cat.id)} >  <td className="px-4 py-3  text-red-600 underline">delete</td></button>
-                                <td className="px-4 py-3 text-red-600 underline">edit</td>
+                              <td className="px-4 py-3 text-red-600 underline"> 
+                                <Link to={`/updateCategory/${cat.id}`}>edit</Link>
+                              </td>
                                 
                                 </tr>
                             );

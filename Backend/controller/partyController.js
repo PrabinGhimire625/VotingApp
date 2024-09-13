@@ -24,6 +24,13 @@ export const fetchAllparty=async(req,res)=>{
     res.status(200).json({message:"Successfully fetched all the party!",data:response})
 }
 
+//read party
+export const fetchSingleParty=async(req,res)=>{
+    const id=req.params.id
+    const response=await Party.findOne({where:{id:id}});
+    res.status(200).json({message:"Successfully fetched single party!",data:response})
+}
+
 //delete party
 export const deleteParty=async(req,res)=>{
     const id=req.params.id

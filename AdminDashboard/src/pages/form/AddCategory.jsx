@@ -10,9 +10,9 @@ const AddCategory = () => {
   const [categoryData, setCategoryData] = useState({categoryName: ""});
   const [errorMessage, setErrorMessage] = useState(null);
 
+  //initially loading when mount to the component frist
   useEffect(()=>{
     dispatch(resetStatus());
-
   },[])
 
   //handle change
@@ -29,7 +29,6 @@ const AddCategory = () => {
     e.preventDefault();
     dispatch(addCategory(categoryData));
   };
-
 
   useEffect(() => {
     if (status === STATUS.SUCCESS) {

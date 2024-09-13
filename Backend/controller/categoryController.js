@@ -37,6 +37,15 @@ export const fetchAllCategory=async(req,res)=>{
   res.status(200).json({message:"All Category is successfully fetched",data:category})
 }
 
+
+//fetch single category
+export const fetchSingleCategory=async(req,res)=>{
+  const id=req.params.id
+  const category=await Category.findOne({where:{id:id}})
+  res.status(200).json({message:"Single Category is successfully fetched!",data:category})
+}
+
+
 //delete category
 export const deleteCategory=async(req,res)=>{
   const id=req.params.id

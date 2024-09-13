@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { deleteParty, fetchAllParty } from '../../../store/dataSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const Party = () => {
     const dispatch=useDispatch()
@@ -110,7 +111,10 @@ const Party = () => {
                                 <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{part?.partyName}</th>
                                 <td className="px-4 py-3">{part?.estd}</td>
                               <button   onClick={() => handleDeleteParty(part.id)} >  <td className="px-4 py-3  text-red-600 underline">delete</td></button>
-                                <td className="px-4 py-3 text-red-600 underline">edit</td>
+                              <td className="px-4 py-3 text-red-600 underline"> 
+                                <Link to={`/updateParty/${part.id}`}>edit</Link>
+                              </td>
+                                
                                 
                                 </tr>
                             );

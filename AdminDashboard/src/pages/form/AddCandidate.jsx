@@ -7,7 +7,7 @@ import Sidebar from '../sidebar/Sidebar';
 
 const AddCandidate = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     const { status, party, category } = useSelector((state) => state.data);
 
     const [candidateData, setCandidateData] = useState({
@@ -17,8 +17,7 @@ const AddCandidate = () => {
         candidateMobileNo: '',
         candidateDescription: '',
         candidateEmail: '',
-        imageUrl: null,
-        userId:'',
+        image: null,
         partyId: '',
         categoryId: ''
     });
@@ -28,7 +27,7 @@ const AddCandidate = () => {
         const { name, value, files } = e.target;
         setCandidateData({
             ...candidateData,
-            [name]: name === 'imageUrl' ? files[0] : value
+            [name]: name === 'image' ? files[0] : value
         });
     };
 
@@ -38,7 +37,7 @@ const AddCandidate = () => {
         dispatch(addCandidate(candidateData));
         if (status === STATUS.SUCCESS) {
             alert('Successfully added the candidate');
-            navigate('/tables');
+            // navigate('/tables');
         } else {
             alert('Failed to add the candidate!');
         }
@@ -88,8 +87,8 @@ const AddCandidate = () => {
                 </div>
 
                 <div className="mb-6">
-                    <label htmlFor="imageUrl" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Candidate Image</label>
-                    <input onChange={handleChange} type="file" id="imageUrl" name="imageUrl" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" accept="image/*" required />
+                    <label htmlFor="image" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Candidate Image</label>
+                    <input onChange={handleChange} type="file" id="image" name="image" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" accept="image/*" required />
                 </div>
 
                 <div className="mb-6">
